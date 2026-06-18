@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wordly Anagram Game (DFS vs A*)</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+</head>
+
+
+<body>
+
+  <!-- Floating Scoreboard -->
+  <div id="floatingScore">
+    Score: <span id="score">0</span>
+  </div>
+
+  <!-- Floating End Game Button -->
+  <div id="floatingEndGame" onclick="triggerEndGameModal()">
+    End Game
+  </div>
+
+  <div class="container">
+    <h1 class="fade-in">✨ Wordly Anagram Game ✨</h1>
+    <p class="fade-in-delay">Unscramble the word! Compare DFS vs A*!</p>
+
+    <!-- Level selector -->
+    <div class="level-selector fade-in">
+      <label for="levelSelect"><strong>Choose Difficulty:</strong></label>
+      <select id="levelSelect">
+        <option value="easy">Easy</option>
+        <option value="medium" selected>Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+    </div>
+
+    <div class="game-section">
+      <div class="scramble-display slide-up">
+        <label>Scrambled Word: </label>
+        <span id="scrambledWord" class="scrambled-word"></span>
+      </div>
+
+      <!-- Audio elements -->
+      <audio id="click-sound" src="sounds/button_click_sound.mp3" preload="auto"></audio>
+      <audio id="submit-sound" src="sounds/submit_button.mp3" preload="auto"></audio>
+      <audio id="level-sound" src="sounds/levels.mp3" preload="auto"></audio>
+      <audio id="floatingEndGameSound" src="sounds/end_game.mp3" preload="auto"></audio>
+      
+      <div class="buttons slide-up-delay">
+        <button class="btn" onclick="startGame()">🎯 Start New Game</button>
+        <button class="btn" onclick="runDFS()">🔎 Solve with DFS</button>
+        <button class="btn" onclick="runAStar()">🚀 Solve with A*</button>
+      </div>
+
+      <div id="userGuessSection" class="fade-in">
+        <input type="text" id="guessInput" placeholder="Your Guess Here">
+        <button class="btn" id="submit-button" onclick="submitGuess()">Submit Guess</button>
+      </div>
+
+      <div id="feedback" class="feedback"></div>
+    </div>
+  </div>
+
+  <!-- Generic Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <p id="modalText"></p>
+    </div>
+  </div>
+
+  <!-- DFS Modal -->
+  <div id="dfsModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeDFSModal()">&times;</span>
+      <div id="dfsPathContent"></div>
+    </div>
+  </div>
+
+  <!-- A* Modal -->
+  <div id="astarModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeAstarModal()">&times;</span>
+      <div id="astarPathContent"></div>
+    </div>
+  </div>
+
+  <!-- End Game Modal -->
+  <div id="endGameModal" class="modal">
+    <div class="modal-content">
+      
+      <div id="endGameContent">
+        <h2 class="game-over-title">Game Over</h2>
+
+        <p>Correct: <span id="finalCorrectDisplay"></span></p>
+        <p>Incorrect: <span id="finalIncorrectDisplay"></span></p>
+        <p>Time Taken: <span id="finalTimeDisplay"></span></p>
+
+
+        <p class="final-score">Your final score is: <span id="finalScoreDisplay">0</span></p>
+        <button  id="playAgainBtn" class="play-again-btn" onclick="restartGame(); closeEndGameModal();">Play Again</button>
+
+      </div>
+    </div>
+  </div>
+ 
+ 
+  
+
+ 
+
+  <script src="script.js"></script>
+</body>
+</html>
